@@ -4,8 +4,12 @@
 #   Arkadiusz Choruzy
 #   achoruzy@gmail.com
 
+import nupicter as nupf
 
-try:
-    import filehandler
-except (ImportError, IOError):
-    filehandler = MissingModule("filehandler", urgent=1)
+
+class test_FileHandler():
+
+    fh = nupf.FileHandler()
+
+    def test_open():
+        fh.open()
