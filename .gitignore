@@ -1,4 +1,5 @@
 venv/
 tests/__pycache__
 nupicter/__pycache__
+nupicter.egg-info/
 .pytest_cache/

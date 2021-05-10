@@ -6,6 +6,6 @@
 
 
 try:
-    import filehandler
+    from nupicter import filehandler
 except (ImportError, IOError):
     filehandler = MissingModule("filehandler", urgent=1)
