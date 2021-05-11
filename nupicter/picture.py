@@ -4,8 +4,8 @@
 #   Arkadiusz Choruzy
 #   achoruzy@gmail.com
 
+class Picture():
 
-try:
-    from nupicter import filehandler
-except (ImportError, IOError):
-    filehandler = MissingModule("filehandler", urgent=1)
+    def __init__(self, img):
+
+        self.name = 'Picture'
