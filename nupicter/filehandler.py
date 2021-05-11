@@ -11,6 +11,9 @@ handle all the file operations on it. It's purpose is also
 to create a data object for later operations."""
 
 import pathlib
+import PIL
+
+import nupicter.picture as nupp
 
 
 class FileHandler():
@@ -18,10 +21,17 @@ class FileHandler():
 
     def __init__(self, filepath: str):
 
-        self.filepath = filepath
+        self.file = pathlib.Path(filepath)
 
-    def __exist__(self):
-        pass
+        self.path = self.file.as_posix()
+
+        self.exists = self.file.is_file()
 
     def open(self):
-        pass
+        if self.exists:
+            with open(self.path, mode='r') as img:
+                editable_img = self.generate(img)
+                return nupp.Picture(editable_img)
+
+    def generate(self, img):
+        return 'test'
