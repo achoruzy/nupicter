@@ -11,27 +11,56 @@ handle all the file operations on it. It's purpose is also
 to create a data object for later operations."""
 
 import pathlib
-import PIL
+import PIL.Image
 
 import nupicter.picture as nupp
 
 
 class FileHandler():
-    """Class for basic file operations."""
+    """FileHandler class to be use for basic file operations.
+
+    As the main purpose, the class opens files and generates nupicter.Picture objects. 
+
+    """
 
     def __init__(self, filepath: str):
 
         self.file = pathlib.Path(filepath)
-
         self.path = self.file.as_posix()
 
         self.exists = self.file.is_file()
 
-    def open(self):
-        if self.exists:
-            with open(self.path, mode='r') as img:
-                editable_img = self.generate(img)
-                return nupp.Picture(editable_img)
+    def _generate(self, img):
+        """FileHandler method that returns a list of picture pixels. 
 
-    def generate(self, img):
-        return 'test'
+        For internal use only.
+
+        Attributes:
+            img (PIL.Image type object): Image object that going to be converted to pixel list.
+        """
+
+        width, height = img.size
+        pixels = img.load()
+
+        pixel_list = []
+        for h in range(height):
+            width_list = []
+
+            for w in range(width):
+                pix = pixels[w, h]
+                width_list.append(pix)
+
+            pixel_list.append(width_list)
+
+        return pixel_list
+
+    def open(self):
+        """FileHandler method for open picture file and generate nupicter.Picture object.
+
+        Returns:
+            An nupicter.Picture object
+        """
+        if self.exists:
+            img = PIL.Image.open(self.path)
+            pixel_list = self._generate(img)
+            return nupp.Picture(pixel_list)
