@@ -19,8 +19,10 @@ import nupicter.picture as nupp
 class FileHandler():
     """FileHandler class to be use for basic file operations.
 
-    As the main purpose, the class opens files and generates nupicter.Picture objects. 
+    As the main purpose, the class opens files and generates nupicter.Picture objects.
 
+    Args:
+        filepath (str): String-typed full filepath for the file 
     """
 
     def __init__(self, filepath: str):
@@ -48,7 +50,7 @@ class FileHandler():
 
             for w in range(width):
                 pix = pixels[w, h]
-                width_list.append(pix)
+                width_list.append(list(pix))
 
             pixel_list.append(width_list)
 
@@ -58,7 +60,7 @@ class FileHandler():
         """FileHandler method for open picture file and generate nupicter.Picture object.
 
         Returns:
-            An nupicter.Picture object
+            nupicter.Picture object
         """
         if self.exists:
             img = PIL.Image.open(self.path)
