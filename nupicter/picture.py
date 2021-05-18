@@ -11,6 +11,10 @@ and includes methods for edition of such files.
 """
 
 import numpy as np
+import pathlib as ptl
+import string
+
+from PIL import Image
 
 
 class Picture():
@@ -34,8 +38,43 @@ class Picture():
         # selfcheck try/except to develop
         return np.asarray(self.pixels)
 
-    def save(self):
-        pass
+    def save(self, path: str, file_name: str, file_format='png'):
+        """Method saves Picture object to file.
+
+        Args:
+            path (str): string typed path for file save
+            file_name (str): name for saved file, only letters, numbers, - an _ to be used
+            file_format (str, optional, 'png' as default): file format for saving, 
+            available options: 'png', 'jpg'
+
+        Raises:
+            AttributeError: if path string is not correct or path doesn't exist
+            AttributeError: if filename string is not correct
+            AttributeError: if format given is not permitted
+        """
+
+        save_path = ptl.Path(path)
+
+        if not save_path.is_dir():
+            raise AttributeError(
+                'Given path is wrong or doesn\'t exist. Input proper path string.')
+
+        for i in string.punctuation:
+            if i in '-_':
+                continue
+            elif i in file_name:
+                raise AttributeError(
+                    'Filename is wrong. Use letters, numbers, - and _ signs only.')
+
+        if file_format.lower() not in ('png', 'jpg'):
+            raise AttributeError(
+                'Given file format is not correct. Use png or jpg only.')
+
+        np_array_img = self.as_array()
+        image_to_save = Image.fromarray(np_array_img)
+        path_to_save = path + file_name
+
+        return image_to_save.save(path_to_save, file_format)
 
     def return_picture(self):
         """Method for return edited Picture class object.

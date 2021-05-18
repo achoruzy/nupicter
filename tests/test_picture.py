@@ -42,6 +42,11 @@ class TestPicture():
 
         assert type(new_picture_obj) == nupp.Picture
 
+    def test_save(self):
+        pic = file.open()
+
+        assert type(pic.save('something', 'filename')) == AttributeError
+
 
 if __name__ == '__main__':
     # pass
