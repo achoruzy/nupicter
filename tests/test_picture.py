@@ -35,6 +35,13 @@ class TestPicture():
         assert type(pix_array) == np.ndarray
         assert list(pix_array[0][0]) == [237, 28, 36]
 
+    def test_return_picture(self):
+        pic = file.open()
+
+        new_picture_obj = pic.return_picture()
+
+        assert type(new_picture_obj) == nupp.Picture
+
 
 if __name__ == '__main__':
     # pass

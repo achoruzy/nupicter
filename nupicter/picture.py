@@ -38,7 +38,12 @@ class Picture():
         pass
 
     def return_picture(self):
-        pass
+        """Method for return edited Picture class object.
+
+        Returns:
+            nupicter.Picture object
+        """
+        return Picture(self.pixels)
 
 
 if __name__ == '__main__':
