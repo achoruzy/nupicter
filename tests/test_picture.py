@@ -63,6 +63,9 @@ class TestPicture():
         with pytest.raises(Exception):
             assert pic.save(path, 'savetest', 'XYz')
 
+    def test_grayscale(self):
+        pass
+
 
 if __name__ == '__main__':
     pass
