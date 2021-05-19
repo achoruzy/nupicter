@@ -8,10 +8,10 @@
 import nupicter.filehandler as nupf
 import nupicter.picture as nupp
 
-import pathlib
-import os
-import sys
-import platform
+import numpy as np
+
+import pytest
+
 
 FILEPATHS = {
     'png': 'C:/Users/achor/Desktop/Python/Projects/002_Nupicter/tests/testfiles/4by4.png'}
@@ -22,21 +22,47 @@ file = nupf.FileHandler(FILEPATHS[IN_USE])
 
 class TestPicture():
 
-    def test_print(self):
-        """ Tests __str__ method. """
+    def test_init(self):
+        """Tests if class __init__ works properly and Picture object is well built."""
 
         pic = file.open()
 
         assert type(pic.pixels) == list
-        assert pic.pixels[0][0] == (237, 28, 36)
+        assert pic.pixels[0][0] == [237, 28, 36]
+
+    def test_as_array(self):
+        """Tests if Picture.as_arraty returns proper numpy.array object."""
+
+        pic = file.open()
+        pix_array = pic.as_array()
+
+        assert type(pix_array) == np.ndarray
+        assert list(pix_array[0][0]) == [237, 28, 36]
+
+    def test_return_picture(self):
+        """Tests if Picture.return_picture creates proper Picture object."""
+
+        pic = file.open()
+        new_picture_obj = pic.return_picture()
+
+        assert type(new_picture_obj) == nupp.Picture
+
+    def test_save_exception(self):
+        """Tests exceptions that may occure when Picture.save is used.
+        If all exception tests are handled in test then file creation will work."""
+
+        pic = file.open()
+        path = 'C:/Users/achor/Desktop/Python/Projects/002_Nupicter/tests/testfiles/'
+
+        with pytest.raises(Exception):
+            assert pic.save('something', 'filename')
+
+        with pytest.raises(Exception):
+            assert pic.save(path, '$%^aaaaaa_')
+
+        with pytest.raises(Exception):
+            assert pic.save(path, 'savetest', 'XYz')
 
 
 if __name__ == '__main__':
     pass
-    # tp = file.open()
-
-    # print(tp.name)
-
-    # tp_list = tp
-
-    # print(tp_list)
