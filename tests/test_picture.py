@@ -64,7 +64,23 @@ class TestPicture():
             assert pic.save(path, 'savetest', 'XYz')
 
     def test_grayscale(self):
-        pass
+        """Tests if Picture.grayscale method creates proper data."""
+
+        pic = file.open()
+
+        gs_test = pic.grayscale()
+
+        assert type(pic.pixels) == list
+        assert pic.pixels[0][0] == [73, 73, 73]
+
+    def test_grayscale_coef(self):
+        """Tests if Picture.grayscale method properly works with hand input grayscale coefficient."""
+
+        pic_coe = file.open()
+
+        gs_test = pic_coe.grayscale(coef=(0.25, 0.8, 0.13))
+
+        assert pic_coe.pixels[0][0] == [86, 86, 86]
 
 
 if __name__ == '__main__':

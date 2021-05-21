@@ -84,13 +84,32 @@ class Picture():
         """
         return Picture(self.pixels)
 
-    def greyscale(self, coef=(0.2164, 0.7152, 0.0722)):
+    def grayscale(self, coef=(0.2164, 0.7152, 0.0722)):
         """Method for converting the picture to a grayscale data.
 
         Args:
             coef (tuple, optional): a tuple for RGB conversion coeficients, as default equals (0.2164, 0.7152, 0.0722)
         """
-        pass
+
+        for row in range(0, len(self.pixels)-1):
+            for pix_rgb in self.pixels[row]:
+                pix_index = self.pixels[row].index(pix_rgb)
+
+                r_gs = coef[0] * pix_rgb[0]
+                g_gs = coef[1] * pix_rgb[1]
+                b_gs = coef[2] * pix_rgb[2]
+
+                grayscale_val = int(r_gs + g_gs + b_gs)
+
+                if grayscale_val < 0:
+                    grayscale_val = 0
+                elif grayscale_val > 255:
+                    grayscale_val = 255
+
+                self.pixels[row][pix_index] = [
+                    grayscale_val, grayscale_val, grayscale_val]
+
+        return
 
 
 if __name__ == '__main__':
