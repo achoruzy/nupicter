@@ -37,6 +37,7 @@ class TestPicture():
         pix_array = pic.as_array()
 
         assert type(pix_array) == np.ndarray
+        assert pix_array.shape == (4, 4, 3)
         assert list(pix_array[0][0]) == [237, 28, 36]
 
     def test_return_picture(self):
