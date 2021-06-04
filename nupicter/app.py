@@ -4,7 +4,17 @@
 #   Arkadiusz Choruzy
 #   achoruzy@gmail.com
 
-import app
+import kivy.uix as kix
+from kivy.app import App
+import kivy
+kivy.require('2.0.0')
+
+
+class NupicterApp(App):
+
+    def build(self):
+        return
+
 
 if __name__ == '__main__':
-    app.NupicterApp().run()
+    pass
