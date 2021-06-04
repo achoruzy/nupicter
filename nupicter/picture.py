@@ -70,9 +70,10 @@ class Picture():
             raise AttributeError(
                 'Given file format is not correct. Use png or jpg only.')
 
-        np_array_img = self.as_array()
+        # the array data has to be converted to uint8 <Unsigned integer (0 to 255)> to work well
+        np_array_img = self.as_array().astype(np.uint8)
         image_to_save = Image.fromarray(np_array_img)
-        path_to_save = path + file_name
+        path_to_save = path + file_name + '.' + file_format
 
         return image_to_save.save(path_to_save, file_format)
 
@@ -88,10 +89,11 @@ class Picture():
         """Method for converting the picture to a grayscale data.
 
         Args:
-            coef (tuple, optional): a tuple for RGB conversion coeficients, as default equals (0.2164, 0.7152, 0.0722)
+            coef (tuple, optional): a tuple for RGB conversion coeficients, 
+            as default equals (0.2164, 0.7152, 0.0722)
         """
 
-        for row in range(0, len(self.pixels)-1):
+        for row in range(0, len(self.pixels)):
             for pix_rgb in self.pixels[row]:
                 pix_index = self.pixels[row].index(pix_rgb)
 
