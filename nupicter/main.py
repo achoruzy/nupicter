@@ -4,7 +4,7 @@
 #   Arkadiusz Choruzy
 #   achoruzy@gmail.com
 
-import app
+import npguiApp as app
 
 if __name__ == '__main__':
     app.NupicterApp().run()
