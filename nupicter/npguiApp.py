@@ -5,6 +5,8 @@
 #   achoruzy@gmail.com
 import os
 import filehandler as fh
+import picture as npic
+from PIL import Image
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.properties import ObjectProperty
@@ -20,30 +22,31 @@ class LoadDialog(FloatLayout):
 
 
 class NupicterStartWidget(Widget):
+    """App start GUI class."""
 
     def dismiss_popup(self):
         self._popup.dismiss()
 
     def show_load(self):
-        content = LoadDialog(load=self.load, cancel=self.dismiss_popup)
-        self._popup = Popup(title="Load file", content=content,
-                            size_hint=(0.9, 0.9))
+        content = LoadDialog(cancel=self.dismiss_popup, load=self.load)
+        self._popup = Popup(title="Load picture file", content=content,
+                            size_hint=(1, 1), background_color=(0.44, 0.62, 0.8))
         self._popup.open()
 
     def load(self, path, filename):
-        # with open(os.path.join(path, filename[0])) as stream:
-        #     self.text_input.text = stream.read()
         file = fh.FileHandler(os.path.join(path, filename[0]))
         image = file.open()
 
         self.dismiss_popup()
 
-        return image
+        return print(image.as_array())
 
 
 class NupicterApp(App):
+    """App builder class."""
 
     def build(self):
+        """Builder method - builds GUI."""
         return NupicterStartWidget()
 
 

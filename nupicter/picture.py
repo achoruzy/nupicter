@@ -71,7 +71,7 @@ class Picture():
                 'Given file format is not correct. Use png or jpg only.')
 
         # the array data has to be converted to uint8 <Unsigned integer (0 to 255)> to work well
-        np_array_img = self.as_array().astype(np.uint8)
+        np_array_img = self.as_array().astype(np.uint8)  # TO OTHER METHOD ->
         image_to_save = Image.fromarray(np_array_img)
         path_to_save = path + file_name + '.' + file_format
 
