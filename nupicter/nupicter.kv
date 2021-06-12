@@ -1,0 +1,106 @@
+#:kivy 2.0.0
+        
+
+<NupicterStartWidget>:
+
+    bg_color: '#2C3E50'
+    logo_color: '#ECF0F1'
+    button_bg_color: '#67809F'
+    button_text_color: '#DADFE1'
+
+    label_logo_font: './gui/Roboto-Thin.ttf'
+
+    button_height: '10mm'
+    button_text_size: '5mm'
+    button_font: './gui/Roboto-Regular.ttf'
+
+    Image:
+        color: root.bg_color
+        size: root.width, root.height
+
+    Label:
+        id: label_logo
+        center_x: root.width / 2
+        center_y: root.height / 2 + 50
+        text: "nupicter"
+        font_name: root.label_logo_font
+        font_size: '25mm'
+        color: root.logo_color
+    
+    Button:
+        id: button_start_open
+        center_x: root.width / 2
+        center_y: root.height / 2 - 40
+        size: 120, root.button_height
+        background_color: root.button_bg_color
+        text: "open file"
+        font_size: root.button_text_size
+        halign: 'center'
+        valign: 'center'
+        font_name: root.button_font
+        color: root.button_text_color
+        on_release: root.show_load()
+    
+    Button:
+        id: button_exit
+        center_x: root.width - 70
+        center_y: 70
+        size: 90, root.button_height
+        background_color: root.button_bg_color
+        text: "exit"
+        font_size: root.button_text_size
+        halign: 'center'
+        valign: 'center'
+        font_name: root.button_font
+        color: root.button_text_color
+        on_release: quit()
+
+
+<LoadDialog>:
+    bg_color: '#2C3E50'
+    logo_color: '#ECF0F1'
+    button_bg_color: '#67809F'
+    button_text_color: '#DADFE1'
+
+    button_height: '10mm'
+    button_text_size: '5mm'
+    button_font: './gui/Roboto-Regular.ttf'
+
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserIconView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            padding: 5
+            spacing: 10
+            Button:
+                size: 90, root.button_height
+                background_color: root.button_bg_color
+                text: "cancel"
+                font_size: root.button_text_size
+                halign: 'center'
+                valign: 'center'
+                font_name: root.button_font
+                color: root.button_text_color
+                on_release: root.cancel()
+
+            Button:
+                size: 90, root.button_height
+                background_color: root.button_bg_color
+                text: "load"
+                font_size: root.button_text_size
+                halign: 'center'
+                valign: 'center'
+                font_name: root.button_font
+                color: root.button_text_color
+                on_release: root.load(filechooser.path, filechooser.selection)
+
+
+    
+
+        
